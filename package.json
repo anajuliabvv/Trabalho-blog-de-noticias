@@ -1,0 +1,12 @@
+{
+  "name": "blog-api",
+  "version": "1.0.0",
+  "description": "API REST de Blog com Express.js",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": { "express": "^5.1.0" }
+}
