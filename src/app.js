@@ -1,10 +1,11 @@
 const express = require("express");
+const path = require("path");
 const escritoresRoutes = require("./routes/escritores");
 const leitoresRoutes = require("./routes/leitores");
 
 const app = express();
 app.use(express.json());
-
+app.use(express.static(path.join(__dirname, "..", "public")));
 app.get("/", (req, res) => res.json({ mensagem: "API do Blog no ar" }));
 app.use("/escritores", escritoresRoutes);
 app.use("/leitores", leitoresRoutes);
