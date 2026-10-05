@@ -30,6 +30,8 @@ router.post("/", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
+  if (db.escritores.some((e) => e.email === req.body.email && e.id !== escritor.id)) {
+  return res.status(409).json({ erro: "Já existe um escritor com esse email" });}
   const escritor = db.escritores.find((e) => e.id === Number(req.params.id));
   if (!escritor) return res.status(404).json({ erro: "Escritor não encontrado" });
   const erro = validar(req.body);
