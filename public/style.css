@@ -1,16 +1,12 @@
 :root {
-  --bg: #f7f7f8;
-  --surface: #ffffff;
-  --text: #1f2328;
-  --muted: #6b7280;
-  --accent: #2f4f6f;
-  --accent-hover: #243d56;
-  --soft: #eceef1;
-  --error-bg: #fbeaea;
-  --error-text: #8a1f1f;
-  --success-bg: #e8f3ec;
-  --success-text: #1f5a35;
-  --radius: 6px;
+  --bg: #ffffff;
+  --text: #000000;
+  --muted: #555555;
+  --surface: #f4f4f4;
+  --line: #d0d0d0;
+  --hover: #e4e4e4;
+  --radius: 4px;
+  --gutter: 40px;
 }
 
 * {
@@ -26,29 +22,55 @@ body {
   line-height: 1.6;
 }
 
+header,
+footer,
+.message,
+main {
+  max-width: 1100px;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
 header {
-  padding: 32px 20px 8px;
-  text-align: center;
+  padding-top: 32px;
+  padding-bottom: 8px;
 }
 
 header h1 {
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 main {
-  max-width: 760px;
-  margin: 24px auto;
-  padding: 0 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 0 48px;
+  align-items: start;
+  margin-top: 24px;
 }
 
 section {
   margin-bottom: 40px;
 }
 
+#posts-section {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+#writers-section {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#readers-section {
+  grid-column: 2;
+  grid-row: 2;
+}
+
 h2 {
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.15rem;
+  font-weight: 700;
   margin-bottom: 14px;
 }
 
@@ -72,9 +94,9 @@ select {
   width: 100%;
   padding: 9px 10px;
   margin-bottom: 14px;
-  border: 1px solid transparent;
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--soft);
+  background: #ffffff;
   color: var(--text);
   font-family: inherit;
   font-size: 1rem;
@@ -89,14 +111,13 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  background: var(--surface);
-  border-color: var(--accent);
+  border-color: #000000;
 }
 
 button {
-  background: var(--accent);
+  background: #000000;
   color: #ffffff;
-  border: none;
+  border: 1px solid #000000;
   border-radius: var(--radius);
   padding: 8px 16px;
   font-size: 0.95rem;
@@ -105,21 +126,23 @@ button {
 }
 
 button:hover {
-  background: var(--accent-hover);
+  background: #333333;
+  border-color: #333333;
 }
 
 button:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid #000000;
   outline-offset: 2px;
 }
 
 button.secondary {
-  background: var(--soft);
-  color: var(--text);
+  background: #ffffff;
+  color: #000000;
+  border-color: var(--line);
 }
 
 button.secondary:hover {
-  background: #dfe2e6;
+  background: var(--hover);
 }
 
 .inline-form {
@@ -139,8 +162,9 @@ button.secondary:hover {
 }
 
 .counter.over {
-  color: var(--error-text);
-  font-weight: 600;
+  color: #000000;
+  font-weight: 700;
+  text-decoration: underline;
 }
 
 .card {
@@ -152,7 +176,7 @@ button.secondary:hover {
 
 .card h3 {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 2px;
 }
 
@@ -177,6 +201,7 @@ button.secondary:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
   background: var(--surface);
   border-radius: var(--radius);
   padding: 10px 16px;
@@ -184,20 +209,28 @@ button.secondary:hover {
 }
 
 .message {
-  max-width: 760px;
-  margin: 16px auto 0;
+  margin-top: 16px;
+}
+
+.message.success,
+.message.error {
   padding: 12px 16px;
   border-radius: var(--radius);
+  max-width: calc(1100px - 2 * var(--gutter));
+  margin-left: var(--gutter);
+  margin-right: var(--gutter);
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .message.success {
-  background: var(--success-bg);
-  color: var(--success-text);
+  background: var(--surface);
+  color: #000000;
 }
 
 .message.error {
-  background: var(--error-bg);
-  color: var(--error-text);
+  background: #000000;
+  color: #ffffff;
 }
 
 .hidden {
@@ -210,13 +243,25 @@ button.secondary:hover {
 }
 
 footer {
-  text-align: center;
-  padding: 24px 20px;
+  padding-top: 24px;
+  padding-bottom: 24px;
   color: var(--muted);
   font-size: 0.9rem;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 800px) {
+  :root {
+    --gutter: 20px;
+  }
+  main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #posts-section,
+  #writers-section,
+  #readers-section {
+    grid-column: 1;
+    grid-row: auto;
+  }
   .inline-form {
     flex-direction: column;
   }
